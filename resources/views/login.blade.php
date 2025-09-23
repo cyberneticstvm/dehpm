@@ -5,7 +5,7 @@
     class="light-style layout-wide customizer-hide"
     dir="ltr"
     data-theme="theme-default"
-    data-assets-path="{{ asset('') }}"
+    data-assets-path="{{ asset('assets') }}"
     data-template="horizontal-menu-template">
 
 <head>

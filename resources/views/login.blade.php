@@ -73,10 +73,9 @@
                         data-app-light-img="devi/devi-logo-transparent.png"
                         data-app-dark-img="devi/devi-logo-transparent.png" />
                     <div class="mx-auto">
-                        <h3>Discover the powerful admin template 🥳</h3>
+                        <h3>Where Every Eye Gets the Care It Deserves 🥳</h3>
                         <p>
-                            Perfectly suited for all level of developers which helps you to <br />
-                            kick start your next big projects & Applications.
+                            At Devi Hospitals, we believe that healthy eyes are the window to a brighter tomorrow. With world-class technology, experienced specialists, and compassionate care, we provide comprehensive solutions for all your vision needs. From routine eye checkups to advanced surgeries, we're here to help you see life in its full clarity.
                         </p>
                     </div>
                 </div>

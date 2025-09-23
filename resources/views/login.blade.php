@@ -66,12 +66,12 @@
             <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center">
                 <div class="flex-row text-center mx-auto">
                     <img
-                        src="{{ asset('/assets/img/devi/devi-logo.svg') }}"
+                        src="{{ asset('/assets/img/devi/devi-logo-transparent.png') }}"
                         alt="Auth Cover Bg color"
                         width="520"
                         class="img-fluid authentication-cover-img"
-                        data-app-light-img="devi/devi-logo.svg"
-                        data-app-dark-img="devi/devi-logo.svg" />
+                        data-app-light-img="devi/devi-logo-transparent.png"
+                        data-app-dark-img="devi/devi-logo-transparent.png" />
                     <div class="mx-auto">
                         <h3>Discover the powerful admin template 🥳</h3>
                         <p>

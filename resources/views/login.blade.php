@@ -70,8 +70,8 @@
                         alt="Auth Cover Bg color"
                         width="520"
                         class="img-fluid authentication-cover-img"
-                        data-app-light-img="pages/login-light.png"
-                        data-app-dark-img="pages/login-dark.png" />
+                        data-app-light-img="devi/devi-logo.svg"
+                        data-app-dark-img="devi/devi-logo.svg" />
                     <div class="mx-auto">
                         <h3>Discover the powerful admin template 🥳</h3>
                         <p>

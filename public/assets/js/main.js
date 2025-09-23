@@ -175,7 +175,6 @@ if (document.getElementById('layout-menu')) {
   // ---------------------------------------
 
   if (typeof i18next !== 'undefined' && typeof i18NextHttpBackend !== 'undefined') {
-    console.log(assetsPath);
     i18next
       .use(i18NextHttpBackend)
       .init({

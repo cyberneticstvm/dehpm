@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    function checkLogin()
+    {
+        if (Auth::user()):
+            return redirect()->route('dashboard');
+        else:
+            return view('login');
+        endif;
+    }
+
     function login(Request $request)
     {
         $credentials = $request->validate([

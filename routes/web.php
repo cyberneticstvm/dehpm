@@ -3,12 +3,9 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('login');
-})->name('login');
-
 Route::middleware(['web'])->group(function () {
     Route::prefix('')->controller(AuthController::class)->group(function () {
+        Route::get('/', 'checkLogin')->name('login');
         Route::post('/', 'login')->name('user.login');
     });
 });

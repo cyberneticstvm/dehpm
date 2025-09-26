@@ -90,47 +90,41 @@
                     <h4 class="mb-2">Welcome to Devi Eye Hospitals! 👋</h4>
                     <p class="mb-4">Please sign-in to your account and manage the projects</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="GET">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email or Username</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="email"
-                                name="email-username"
-                                placeholder="Enter your email or username"
-                                autofocus />
+                    {{ html()->form('POST')->route('user.login')->class('mb-3')->open() }}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email or Username</label>
+                        {{ html()->email('email', old('email'))->class('form-control')->placeholder('hello@example.com')->autofocus() }}
+                        @error('email')
+                        <small class="text-danger">{{ $errors->first('email') }}</small>
+                        @enderror
+                    </div>
+                    <div class="mb-3 form-password-toggle">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">Password</label>
+                            <a href="#">
+                                <small>Forgot Password?</small>
+                            </a>
                         </div>
-                        <div class="mb-3 form-password-toggle">
-                            <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Password</label>
-                                <a href="auth-forgot-password-cover.html">
-                                    <small>Forgot Password?</small>
-                                </a>
-                            </div>
-                            <div class="input-group input-group-merge">
-                                <input
-                                    type="password"
-                                    id="password"
-                                    class="form-control"
-                                    name="password"
-                                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                    aria-describedby="password" />
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                            </div>
+                        <div class="input-group input-group-merge">
+                            {{ html()->password('password', null)->class('form-control')->placeholder('******') }}
+                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                         </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me" />
-                                <label class="form-check-label" for="remember-me"> Remember Me </label>
-                            </div>
+                        @error('password')
+                        <small class="text-danger">{{ $errors->first('password') }}</small>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            {{ html()->checkbox('remember')->attribute('id', 'remember-me')->class('form-check-input') }}
+                            <label class="form-check-label" for="remember-me"> Remember Me </label>
                         </div>
-                        <button class="btn btn-primary d-grid w-100">Sign in</button>
-                    </form>
+                    </div>
+                    {{ html()->submit('Login')->class('btn btn-submit btn-primary w-100') }}
+                    {{ HTML()->form()->close() }}
 
                     <p class="text-center">
                         <span>New on our platform?</span>
-                        <a href="auth-register-cover.html">
+                        <a href="#">
                             <span>Create an account</span>
                         </a>
                     </p>
@@ -184,6 +178,7 @@
 
     <!-- Page JS -->
     <script src="{{ asset('/assets/js/pages-auth.js') }}"></script>
+    @include("message")
 </body>
 
 </html>

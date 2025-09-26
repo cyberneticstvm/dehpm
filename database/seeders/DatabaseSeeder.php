@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Branch;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\UserBranch;
 use App\Models\UserProject;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,19 +27,18 @@ class DatabaseSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
+            'role-restore',
             'user-list',
             'user-create',
             'user-edit',
             'user-delete',
-            'project-list',
-            'project-create',
-            'project-edit',
-            'project-delete',
-            'project-switch',
-            'partner-list',
-            'partner-create',
-            'partner-edit',
-            'partner-delete',
+            'user-restore',
+            'branch-list',
+            'branch-create',
+            'branch-edit',
+            'branch-delete',
+            'branch-restore',
+            'branch-switch',
         ];
 
         foreach ($permissions as $permission) {
@@ -50,9 +51,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('stupid'),
         ]);
 
-        $project = Project::create([
+        $branch = Branch::create([
             'name' => 'Devi Eye Hospital - Sasthamkotta',
             'code' => 'TVM',
+            'mobile' => '0123456789',
             'contact_number' => '0123456789',
             'address' => 'Trivandrum',
             'created_by' => $user->id,
@@ -64,9 +66,9 @@ class DatabaseSeeder extends Seeder
         $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
-        UserProject::create([
+        UserBranch::create([
             'user_id' => $user->id,
-            'project_id' => $project->id
+            'branch_id' => $branch->id
         ]);
     }
 }

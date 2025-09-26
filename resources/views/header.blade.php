@@ -199,6 +199,19 @@
                                 <span class="align-middle">Log Out</span>
                             </a>
                         </li>
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('user.force.logout.get') }}">
+                                <i class="bx bx-power-off me-2 text-danger"></i>
+                                <span class="align-middle text-danger" data-bs-toggle="tooltip"
+                                    data-bs-offset="0,4"
+                                    data-bs-placement="top"
+                                    data-bs-html="true"
+                                    title="Force logout current user from all devices except current device">Force Logout</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!--/ User -->

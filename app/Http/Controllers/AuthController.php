@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,5 +46,23 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login')->with("success", "User logged out successfully");
+    }
+
+    function forceLogoutGet()
+    {
+        return view("misc.force-logout");
+    }
+
+    function forceLogout(Request $request)
+    {
+        $credentials = $request->validate([
+            'password' => 'required|min:6',
+        ]);
+        try {
+            Auth::logoutOtherDevices($request->password);
+        } catch (Exception $e) {
+            return redirect()->back()->with("error", $e->getMessage());
+        }
+        return redirect()->route('dashboard')->with("success", "User logged out from all devices successfully!");
     }
 }

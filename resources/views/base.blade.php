@@ -40,6 +40,8 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 
     <!-- Page CSS -->
 
@@ -124,11 +126,15 @@
     <!-- Vendors JS -->
     <script src="{{ asset('/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
+    <!-- Page JS -->
+    <script src="{{ asset('/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+
     <!-- Main JS -->
     <script src="{{ asset('/assets/js/main.js') }}"></script>
-
-    <!-- Page JS -->
-    <script src="{{ asset('/assets/js/dashboards-analytics.js') }}"></script>
+    <script>
+        $(".datatables-basic").dataTable();
+    </script>
+    <script src="{{ asset('/assets/js/script.js') }}"></script>
     @include("message")
 </body>
 

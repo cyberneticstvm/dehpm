@@ -3,13 +3,13 @@
     <div class="container-xxl d-flex h-100">
         <ul class="menu-inner">
             <!-- Dashboards -->
-            <li class="menu-item active">
+            <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Dashboards">Dashboards</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item active">
+                    <li class="menu-item">
                         <a href="index.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-pie-chart-alt-2"></i>
                             <div data-i18n="Analytics">Analytics</div>
@@ -40,38 +40,13 @@
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
-                    <div data-i18n="Layouts">Layouts</div>
+                    <div data-i18n="Administration">Administration</div>
                 </a>
-
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="layouts-without-menu.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-menu"></i>
-                            <div data-i18n="Without menu">Without menu</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="../vertical-menu-template/" class="menu-link" target="_blank">
-                            <i class="menu-icon tf-icons bx bx-vertical-center"></i>
-                            <div data-i18n="Vertical">Vertical</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="layouts-fluid.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-fullscreen"></i>
-                            <div data-i18n="Fluid">Fluid</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="layouts-container.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-exit-fullscreen"></i>
-                            <div data-i18n="Container">Container</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="layouts-blank.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-square-rounded"></i>
-                            <div data-i18n="Blank">Blank</div>
+                        <a href="{{ route('user.register') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="User Management">User Management</div>
                         </a>
                     </li>
                 </ul>

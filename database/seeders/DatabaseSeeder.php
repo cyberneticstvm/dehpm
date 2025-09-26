@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $permissions = [
+            'user-force-logout',
             'role-list',
             'role-create',
             'role-edit',

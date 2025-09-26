@@ -10,7 +10,7 @@ Route::middleware(['web'])->group(function () {
         Route::post('/', 'login')->name('user.login');
     });
 });
-Route::middleware(['web', 'auth'])->group(function () {
+Route::middleware(['web', 'auth', 'auth.session'])->group(function () {
     Route::prefix('')->controller(AuthController::class)->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
         Route::get('force/logout', 'forceLogoutGet')->name('user.force.logout.get');

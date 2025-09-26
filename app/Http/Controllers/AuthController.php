@@ -56,7 +56,7 @@ class AuthController extends Controller
     function forceLogout(Request $request)
     {
         $credentials = $request->validate([
-            'password' => 'required|min:6',
+            'password' => 'required|current-password|min:6',
         ]);
         try {
             Auth::logoutOtherDevices($request->password);

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +20,23 @@ Route::middleware(['web', 'auth', 'auth.session'])->group(function () {
         Route::get('logout', 'logout')->name('logout');
     });
 
+    Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
+        Route::get('edit', 'edit')->name('edit');
+    });
+
     Route::prefix('user')->controller(UserController::class)->group(function () {
         Route::get('', 'index')->name('user.register');
+        Route::post('save', 'store')->name('user.save');
+        Route::post('update', 'update')->name('user.update');
+        Route::get('delete/{id}', 'destroy')->name('user.delete');
+        Route::get('restore/{id}', 'restore')->name('user.restore');
+    });
+
+    Route::prefix('branch')->controller(BranchController::class)->group(function () {
+        Route::get('', 'index')->name('branch.register');
+        Route::post('save', 'store')->name('branch.save');
+        Route::post('update', 'update')->name('branch.update');
+        Route::get('delete/{id}', 'destroy')->name('branch.delete');
+        Route::get('restore/{id}', 'restore')->name('branch.restore');
     });
 });

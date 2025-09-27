@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>User Register</h5>
+                            <h5>Branch Register</h5>
                         </div>
                         <div class="col text-end">
                             <div class="btn-group">
@@ -24,7 +24,7 @@
                                     <li><a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-file-pdf text-danger"></i>&nbsp;&nbsp;Pdf</a></li>
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-icon btn-primary modalDrawer" data-identifier="add-new-user">
+                            <button type="button" class="btn btn-icon btn-primary modalDrawer" data-identifier="add-new-branch">
                                 <span class="tf-icons bx bx-plus"></span>
                             </button>
                         </div>
@@ -36,26 +36,28 @@
                             <tr>
                                 <th>SL No</th>
                                 <th>Name</th>
-                                <th>Role</th>
-                                <th>Email</th>
+                                <th>Code</th>
+                                <th>Mobile</th>
+                                <th>Address</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($users as $key => $user)
+                            @forelse($branches as $key => $branch)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->roles()->first()->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td class="text-center">{!! $user->deleteStatus() !!}</td>
+                                <td>{{ $branch->name }}</td>
+                                <td>{{ $branch->code }}</td>
+                                <td>{{ $branch->mobile }}</td>
+                                <td>{{ $branch->address }}</td>
+                                <td class="text-center">{!! $branch->deleteStatus() !!}</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="modalDrawerEdit text-warning" data-identifier="edit-user" data-id="{{ $user->id }}" data-model="user">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                    @if($user->deleted_at)
-                                    <a href="{{ route('user.restore', encrypt($user->id)) }}" class="text-success proceed">Restore</a>
+                                    <a href="javascript:void(0)" class="modalDrawerEdit text-warning" data-identifier="edit-branch" data-id="{{ $branch->id }}" data-model="branch">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    @if($branch->deleted_at)
+                                    <a href="{{ route('branch.restore', encrypt($branch->id)) }}" class="text-success proceed">Restore</a>
                                     @else
-                                    <a href="{{ route('user.delete', encrypt($user->id)) }}" class="text-danger dlt">Delete</a>
+                                    <a href="{{ route('branch.delete', encrypt($branch->id)) }}" class="text-danger dlt">Delete</a>
                                     @endif
                                 </td>
                             </tr>
@@ -68,5 +70,6 @@
         </div>
     </div>
 </div>
-@include("drawer.user.create")
+@include("drawer.branch.create")
+@include("drawer.branch.edit")
 @endsection

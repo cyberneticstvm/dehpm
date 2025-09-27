@@ -126,3 +126,9 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.req::after{
+  content: " *";
+  color: red;
+  font-weight: bold;
+}

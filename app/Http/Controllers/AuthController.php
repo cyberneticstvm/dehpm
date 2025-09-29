@@ -30,8 +30,10 @@ class AuthController extends Controller
             if (Auth::attempt($credentials, $remember)):
                 $agent = new Agent();
                 $location = Location::get($request->ip);
-                createLoginLog($agent, $location);
-                return redirect()->intended('dashboard')->with("success", "User logged in successfully");
+                dd($location);
+                die;
+            /*createLoginLog($agent, $location);
+                return redirect()->intended('dashboard')->with("success", "User logged in successfully");*/
             endif;
             return redirect()->back()->with("error", "The provided credentials do not match with our records.")->withInput($request->all());
         } catch (Exception $e) {

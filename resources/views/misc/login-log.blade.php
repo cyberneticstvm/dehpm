@@ -57,8 +57,8 @@
                                 <td>{{ $log->region }}</td>
                                 <td>{{ $log->city }}</td>
                                 <td>{{ $log->zip }}</td>
-                                <td>{{ $log->login_at->format('d.M.Y h:i') }}</td>
-                                <td>{{ $log->logout_at?->format('d.M.Y h:i') }}</td>
+                                <td>{{ $log->login_at->format('d.M.Y H:a') }}</td>
+                                <td>{{ $log->logout_at?->format('d.M.Y H:a') }}</td>
                             </tr>
                             @empty
                             @endforelse

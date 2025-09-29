@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jenssegers\Agent\Agent;
+use Stevebauman\Location\Facades\Location;
 
 class AuthController extends Controller
 {
@@ -25,8 +26,11 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
         try {
+            $agent = new Agent();
+            $location = Location::get($request->ip);
             $remember = $request->has('remember');
             if (Auth::attempt($credentials, $remember)):
+                createLoginLog($agent, $location);
                 return redirect()->intended('dashboard')->with("success", "User logged in successfully");
             endif;
             return redirect()->back()->with("error", "The provided credentials do not match with our records.")->withInput($request->all());

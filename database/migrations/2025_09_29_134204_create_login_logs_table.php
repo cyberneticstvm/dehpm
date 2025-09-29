@@ -23,7 +23,7 @@ return new class extends Migration
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->text('login_session_id')->unique()->nullable();
-            $table->timestamp('login_at')->useCurrent();
+            $table->timestamp('login_at')->nullable();
             $table->timestamp('logout_at')->nullable();
             $table->timestamps();
         });

@@ -11,6 +11,7 @@
 
 use App\Models\LoginLog;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -37,6 +38,7 @@ function createLoginLog($agent, $location)
         'lat' => $location->latitude,
         'lng' => $location->longitude,
         'login_session_id' => $uid,
+        'login_at' => Carbon::now(),
     ]);
     User::where('id', Auth::user()->id)->update([
         'login_session_id' => $uid,

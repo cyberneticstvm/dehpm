@@ -26,10 +26,10 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
         try {
-            $agent = new Agent();
-            $location = Location::get($request->ip);
             $remember = $request->has('remember');
             if (Auth::attempt($credentials, $remember)):
+                $agent = new Agent();
+                $location = Location::get($request->ip);
                 createLoginLog($agent, $location);
                 return redirect()->intended('dashboard')->with("success", "User logged in successfully");
             endif;

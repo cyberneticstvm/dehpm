@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoginLog;
-use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -34,30 +32,7 @@ class AuthController extends Controller
             if (Auth::attempt($credentials, $remember)):
                 $agent = new Agent();
                 $location = Location::get($request->ip);
-                $device = "Computer";
-                $uid = Str::uuid();
-                if ($agent->isMobile() && $agent->isAndroidOS()) {
-                    $device = "Android";
-                } elseif ($agent->isTablet()) {
-                    $device = "Tablet";
-                } elseif ($agent->isMobile() && $agent->isSafari()) {
-                    $device = "iOS";
-                }
-                LoginLog::create([
-                    'user_id' => Auth::user()->id,
-                    'ip_address' => $location->ip,
-                    'user_agent' => $device,
-                    'country' => $location->countryName,
-                    'region' => $location->regionName,
-                    'city' => $location->cityName,
-                    'zip' => $location->zipCode,
-                    'lat' => $location->latitude,
-                    'lng' => $location->longitude,
-                    'login_session_id' => $uid,
-                ]);
-                User::where('id', Auth::user()->id)->update([
-                    'login_session_id' => $uid,
-                ]);
+                createLoginLog($agent, $location);
                 return redirect()->intended('dashboard')->with("success", "User logged in successfully");
             endif;
             return redirect()->back()->with("error", "The provided credentials do not match with our records.")->withInput($request->all());

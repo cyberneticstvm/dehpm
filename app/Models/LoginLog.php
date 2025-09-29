@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class LoginLog extends Model
 {
-    protected $casts = [];
+    protected $guarded = [];
 }

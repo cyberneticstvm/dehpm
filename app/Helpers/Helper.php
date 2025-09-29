@@ -16,14 +16,15 @@ use Illuminate\Support\Str;
 
 function createLoginLog($agent, $location)
 {
-    $device = "Computer";
+    $devices = ['Computer', 'Android', 'iOS', 'Tablet', 'Other'];
+    $device = $devices[0];
     $uid = Str::uuid();
     if ($agent->isMobile() && $agent->isAndroidOS()) {
-        $device = "Android";
+        $device = $devices[1];
     } elseif ($agent->isTablet()) {
-        $device = "Tablet";
+        $device = $devices[2];
     } elseif ($agent->isMobile() && $agent->isSafari()) {
-        $device = "iOS";
+        $device = $devices[3];
     }
     LoginLog::create([
         'user_id' => Auth::user()->id,

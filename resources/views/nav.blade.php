@@ -37,6 +37,12 @@
                             <div data-i18n="Branch Management">Branch Management</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ route('user.login.log') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-git-branch"></i>
+                            <div data-i18n="Login Log">Login Log</div>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

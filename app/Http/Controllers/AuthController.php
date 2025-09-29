@@ -41,6 +41,12 @@ class AuthController extends Controller
         }
     }
 
+    function loginLog()
+    {
+        $logs = LoginLog::orderByDesc('id')->get();
+        return view('misc.login-log', compact('logs'));
+    }
+
     function dashboard()
     {
         return view('dashboard');

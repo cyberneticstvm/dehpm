@@ -15,6 +15,7 @@ Route::middleware(['web'])->group(function () {
 Route::middleware(['web', 'auth', 'auth.session'])->group(function () {
     Route::prefix('')->controller(AuthController::class)->group(function () {
         Route::get('dashboard', 'dashboard')->name('dashboard');
+        Route::get('loginlog', 'loginLog')->name('user.login.log');
         Route::get('force/logout', 'forceLogoutGet')->name('user.force.logout.get');
         Route::post('force/logout', 'forceLogout')->name('user.force.logout');
         Route::get('logout', 'logout')->name('logout');

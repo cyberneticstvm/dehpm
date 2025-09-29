@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {{ Session::get('agent') }}
+
                 </div>
             </div>
         </div>

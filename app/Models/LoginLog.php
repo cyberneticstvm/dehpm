@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class LoginLog extends Model
 {
     protected $guarded = [];
+
+    protected $casts = ['login_at' => 'datetime', 'logout_at' => 'datetime'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

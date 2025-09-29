@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoginLog;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +48,9 @@ class AuthController extends Controller
 
     function logout(Request $request)
     {
+        LoginLog::where('user_id', Auth::user()->id)->where('login_session_id', Auth::user()->login_session_id)->update([
+            'logout_at' => Carbon::now(),
+        ]);
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

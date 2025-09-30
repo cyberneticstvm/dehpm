@@ -8,6 +8,7 @@ use App\Models\Month;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\UserBranch;
+use App\Models\UserDevice;
 use App\Models\UserProject;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -129,6 +130,10 @@ class DatabaseSeeder extends Seeder
         UserBranch::create([
             'user_id' => $user->id,
             'branch_id' => $branch->id
+        ]);
+        UserDevice::insert([
+            'user_id' => $user->id,
+            'device_id' => 24,
         ]);
     }
 }

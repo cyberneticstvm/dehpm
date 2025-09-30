@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Branch;
+use App\Models\Extra;
+use App\Models\Month;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\UserBranch;
@@ -52,17 +54,74 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('stupid'),
         ]);
 
+        $months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+
+        $btypes = [
+            'Hospital',
+            'Store',
+            'DRX Lab',
+            'Other Lab',
+            'Other',
+        ];
+
+        $pmodes = [
+            'Cash',
+            'Card',
+            'Cheque',
+            'Upi',
+            'Bank Transfer',
+            'Other',
+        ];
+
+        $devices = [
+            'Computer',
+            'Android',
+            'iOS',
+            'Tablet',
+            'Other',
+        ];
+
+        foreach ($months as $month) {
+            Extra::insert(['name' => $month, 'category' => 'month']);
+        }
+
+        foreach ($devices as $device) {
+            Extra::insert(['name' => $device, 'category' => 'device']);
+        }
+
+        foreach ($btypes as $btype) {
+            Extra::insert(['name' => $btype, 'category' => 'branch_type']);
+        }
+
+        foreach ($pmodes as $pmode) {
+            Extra::insert(['name' => $pmode, 'category' => 'pmode']);
+        }
+
         $branch = Branch::create([
             'name' => 'Devi Eye Hospital - Sasthamkotta',
             'code' => 'TVM',
             'mobile' => '0123456789',
             'contact_number' => '0123456789',
             'address' => 'Trivandrum',
+            'is_primary' => true,
+            'type' => 13,
             'created_by' => $user->id,
             'updated_by' => $user->id,
         ]);
 
-        Role::create(['name' => 'Partner']);
         $role = Role::create(['name' => 'Administrator']);
         $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);

@@ -11,6 +11,11 @@ class Branch extends Model
 
     protected $guarded = [];
 
+    public function branchType()
+    {
+        return $this->belongsTo(Extra::class, 'type', 'id');
+    }
+
     public function deleteStatus()
     {
         return ($this->deleted_at) ? "<i class='fa fa-close text-danger'></i>" : "<i class='fa fa-check text-success'></i>";

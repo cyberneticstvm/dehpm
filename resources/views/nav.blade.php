@@ -32,6 +32,12 @@
                         </a>
                     </li>
                     <li class="menu-item">
+                        <a href="{{ route('role.register') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-minus"></i>
+                            <div data-i18n="Roles & Permissions">Roles & Permissions</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
                         <a href="{{ route('branch.register') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-git-branch"></i>
                             <div data-i18n="Branch Management">Branch Management</div>
@@ -39,7 +45,7 @@
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('user.login.log') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-git-branch"></i>
+                            <i class="menu-icon tf-icons bx bx-file"></i>
                             <div data-i18n="Login Log">Login Log</div>
                         </a>
                     </li>

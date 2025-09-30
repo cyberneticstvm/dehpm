@@ -47,6 +47,10 @@
             </div>
         </div>
         <div class="col-sm-12">
+            <label for="selectpickerBasic" class="form-label req">Branch Type</label>
+            {{ html()->select('type', $types, old('type'))->class('select2 form-select bType')->placeholder('Select')->required() }}
+        </div>
+        <div class="col-sm-12">
             <label class="form-label req" for="basicFullname">Address</label>
             <div class="input-group input-group-merge">
                 <span id="basicFullname2" class="input-group-text"><i class="bxr bx-location"></i></span>
@@ -56,7 +60,7 @@
             <small class="text-danger">{{ $errors->first('address') }}</small>
             @enderror
         </div>
-        <div class="col-sm-12 text-end">
+        <div class="col-sm-12 text-end mt-3">
             {{ html()->submit('Update')->class('btn btn-submit btn-primary data-submit me-sm-3 me-1') }}
             {{ html()->reset('Cancel')->class('btn btn-outline-secondary')->attribute('data-bs-dismiss', 'offcanvas') }}
         </div>

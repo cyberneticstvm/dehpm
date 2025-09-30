@@ -1,6 +1,19 @@
 $(function(){
     "use strict"
 
+    $(".datatables-basic").dataTable();
+
+    select2 = $('.select2');
+    if (select2.length) {
+        select2.each(function() {
+            var $this = $(this);
+            $this.wrap('<div class="position-relative"></div>').select2({
+                placeholder: 'Select value',
+                dropdownParent: $this.parent()
+            });
+        });
+    }
+
     let offCanvasElement, offCanvasEl;
     $(document).on("click", ".modalDrawer", function(){   
         var el = $(this).data("identifier"); 
@@ -28,6 +41,9 @@ $(function(){
                     mobile.value = res.data.mobile;
                     const contact = document.querySelector('.editContact');
                     contact.value = res.data.contact ?? null;
+                    const btype = document.querySelector('.bType');
+                    btype.value = res.data.type;
+                    $(".bType").select2();
                     const address = document.querySelector('.editAddress');
                     address.value = res.data.address;
                 }                 

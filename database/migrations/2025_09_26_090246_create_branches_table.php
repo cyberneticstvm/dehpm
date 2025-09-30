@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('mobile', 10)->nullable();
             $table->string('contact_number')->nullable();
             $table->string('address')->nullable();
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->boolean('is_primary')->default(false);
+            $table->foreignId('type')->constrained('extras', 'id')->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('users', 'id')->onDelete('cascade');
+            $table->foreignId('updated_by')->constrained('users', 'id')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

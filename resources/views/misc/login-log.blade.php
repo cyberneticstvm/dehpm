@@ -24,9 +24,6 @@
                                     <li><a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-file-pdf text-danger"></i>&nbsp;&nbsp;Pdf</a></li>
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-icon btn-primary modalDrawer" data-identifier="add-new-branch">
-                                <span class="tf-icons bx bx-plus"></span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -69,6 +66,4 @@
         </div>
     </div>
 </div>
-@include("drawer.branch.create")
-@include("drawer.branch.edit")
 @endsection

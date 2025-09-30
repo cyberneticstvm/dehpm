@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\Extra;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +13,17 @@ class BranchController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $types;
+    public function __construct()
+    {
+        $this->types = Extra::where('category', 'branch_type')->pluck('name', 'id');
+    }
+
     public function index()
     {
         $branches = Branch::withTrashed()->orderByDesc('updated_at')->get();
-        return view('branch.index', compact('branches'));
+        $types = $this->types;
+        return view('branch.index', compact('branches', 'types'));
     }
 
     /**

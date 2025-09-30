@@ -50,6 +50,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function branches()
+    {
+        return $this->hasMany(UserBranch::class, 'user_id', 'id');
+    }
+
+    public function devices()
+    {
+        return $this->hasMany(UserDevice::class, 'user_id', 'id');
+    }
+
     public function deleteStatus()
     {
         return ($this->deleted_at) ? "<i class='fa fa-close text-danger'></i>" : "<i class='fa fa-check text-success'></i>";

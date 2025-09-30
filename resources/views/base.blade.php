@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset('/assets/vendor/css/rtl/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('/assets/vendor/css/rtl/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('/assets/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
@@ -121,6 +123,9 @@
     <script src="{{ asset('/assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ asset('/assets/vendor/js/menu.js') }}"></script>
 
+    <script src="{{ asset('/assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
+
     <!-- endbuild -->
 
     <!-- Vendors JS -->
@@ -131,10 +136,14 @@
 
     <!-- Main JS -->
     <script src="{{ asset('/assets/js/main.js') }}"></script>
-    <script>
-        $(".datatables-basic").dataTable();
-    </script>
     <script src="{{ asset('/assets/js/script.js') }}"></script>
+    @if(in_array(Route::current()->getName(), array('dashboard')))
+    <script>
+        $(function() {
+            $("#branchSelector").modal('show');
+        })
+    </script>
+    @endif
     @include("message")
 </body>
 

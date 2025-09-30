@@ -24,9 +24,9 @@
                                     <li><a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-file-pdf text-danger"></i>&nbsp;&nbsp;Pdf</a></li>
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-icon btn-primary modalDrawer" data-identifier="add-new-user">
+                            <a href="{{ route('user.create') }}" class="btn btn-icon btn-primary">
                                 <span class="tf-icons bx bx-plus"></span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td class="text-center">{!! $user->deleteStatus() !!}</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="modalDrawerEdit text-warning" data-identifier="edit-user" data-id="{{ $user->id }}" data-model="user">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <a href="{{ route('user.edit', encrypt($user->id)) }}" class="text-warning">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                     @if($user->deleted_at)
                                     <a href="{{ route('user.restore', encrypt($user->id)) }}" class="text-success proceed">Restore</a>
                                     @else
@@ -68,5 +68,4 @@
         </div>
     </div>
 </div>
-@include("drawer.user.create")
 @endsection

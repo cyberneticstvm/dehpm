@@ -2,14 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
+use App\Models\Extra;
 use App\Models\User;
+use App\Models\UserBranch;
+use App\Models\UserDevice;
+use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    protected $branches, $devices, $roles;
+    public function __construct()
+    {
+        $this->branches = Branch::pluck('name', 'id');
+        $this->devices = Extra::where('category', 'device')->pluck('name', 'id');
+        $this->roles = Role::pluck('name', 'name')->all();
+    }
+
     public function index()
     {
         $users = User::withTrashed()->get();
@@ -21,7 +39,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = $this->roles;
+        $branches = $this->branches;
+        $devices = $this->devices;
+        return view('user.create', compact('roles', 'branches', 'devices'));
     }
 
     /**
@@ -29,7 +50,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'mobile' => 'nullable|numeric|digits:10|unique:users,mobile',
+            'password' => 'required|min:6',
+            'roles' => 'required',
+            'branches' => 'required',
+            'devices' => 'required',
+        ]);
+        try {
+            $input = $request->except(array('branches', 'roles', 'devices'));
+            $input['password'] = Hash::make($input['password']);
+            $input['created_by'] = $request->user()->id;
+            $input['updated_by'] = $request->user()->id;
+            DB::transaction(function () use ($request, $input) {
+                $user = User::create($input);
+                $user->assignRole($request->input('roles'));
+                $branches = [];
+                $devices = [];
+                foreach ($request->branches as $key => $br) :
+                    $branches[] = [
+                        'user_id' => $user->id,
+                        'branch_id' => $br,
+                    ];
+                endforeach;
+                foreach ($request->devices as $key => $device) :
+                    $devices[] = [
+                        'user_id' => $user->id,
+                        'device_id' => $device,
+                    ];
+                endforeach;
+                UserBranch::insert($branches);
+                UserDevice::insert($devices);
+            });
+        } catch (Exception $e) {
+            return redirect()->back()->with("error", $e->getMessage())->withInput($request->all());
+        }
+        return redirect()->route('user.register')->with("success", "User created successfully");
     }
 
     /**
@@ -45,7 +103,12 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail(decrypt($id));
+        $roles = $this->roles;
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        $branches = $this->branches;
+        $devices = $this->devices;
+        return view('user.edit', compact('user', 'roles', 'userRole', 'branches', 'devices'));
     }
 
     /**
@@ -53,7 +116,50 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $id = decrypt($id);
+        $request->validate([
+            'name' => 'required',
+            'mobile' => 'nullable|numeric|digits:10|unique:users,mobile,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
+            'roles' => 'required',
+            'branches' => 'required',
+            'devices' => 'required',
+        ]);
+        try {
+            $input = $request->except(array('branches', 'roles', 'devices'));
+            if (!empty($input['password'])) {
+                $input['password'] = Hash::make($input['password']);
+            } else {
+                $input = Arr::except($input, array('password'));
+            }
+            DB::transaction(function () use ($request, $input, $id) {
+                $user = User::findOrFail($id);
+                $user->update($input);
+                $branches = [];
+                $devices = [];
+                foreach ($request->branches as $key => $br) :
+                    $branches[] = [
+                        'user_id' => $user->id,
+                        'branch_id' => $br,
+                    ];
+                endforeach;
+                foreach ($request->devices as $key => $device) :
+                    $devices[] = [
+                        'user_id' => $user->id,
+                        'device_id' => $device,
+                    ];
+                endforeach;
+                DB::table('model_has_roles')->where('model_id', $id)->delete();
+                DB::table('user_branches')->where('user_id', $id)->delete();
+                DB::table('user_devices')->where('user_id', $id)->delete();
+                $user->assignRole($request->input('roles'));
+                UserBranch::insert($branches);
+                UserDevice::insert($devices);
+            });
+        } catch (Exception $e) {
+            return redirect()->back()->with("error", $e->getMessage())->withInput($request->all());
+        }
+        return redirect()->route('user.register')->with("success", "User updated successfully");
     }
 
     /**
@@ -61,6 +167,15 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::findOrFail(decrypt($id))->delete();
+        UserBranch::where('user_id', decrypt($id))->delete();
+        UserDevice::where('user_id', decrypt($id))->delete();
+        return redirect()->route('user.register')->with("success", "User deleted successfully");
+    }
+
+    public function restore(string $id)
+    {
+        User::withTrashed()->where('id', decrypt($id))->restore();
+        return redirect()->route('user.register')->with("success", "User restored successfully");
     }
 }

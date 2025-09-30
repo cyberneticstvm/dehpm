@@ -9,23 +9,40 @@
     return $code;
 }*/
 
+use App\Models\Extra;
 use App\Models\LoginLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+
+function loggedDevice($agent)
+{
+    $devices = Extra::where('category', 'device')->orderBy('id')->get()->toArray();
+    if ($agent->isMobile() && $agent->isAndroidOS()) {
+        $device = $devices[1]['name'];
+    } elseif ($agent->isTablet()) {
+        $device = $devices[2]['name'];
+    } elseif ($agent->isMobile() && $agent->isSafari()) {
+        $device = $devices[3]['name'];
+    } else {
+        $device = $devices[0]['name'];
+    }
+    return $device;
+}
+
 function createLoginLog($agent, $location)
 {
-    $devices = ['Computer', 'Android', 'iOS', 'Tablet', 'Other'];
-    $device = $devices[0];
+    $devices = Extra::where('category', 'device')->orderBy('id')->get()->toArray();
+    $device = $devices[0]['name'];
     $uid = Str::uuid();
     if ($agent->isMobile() && $agent->isAndroidOS()) {
-        $device = $devices[1];
+        $device = $devices[1]['name'];
     } elseif ($agent->isTablet()) {
-        $device = $devices[2];
+        $device = $devices[2]['name'];
     } elseif ($agent->isMobile() && $agent->isSafari()) {
-        $device = $devices[3];
+        $device = $devices[3]['name'];
     }
     LoginLog::create([
         'user_id' => Auth::user()->id,

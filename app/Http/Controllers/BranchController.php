@@ -7,9 +7,23 @@ use App\Models\Extra;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class BranchController extends Controller
+class BranchController extends Controller implements HasMiddleware
 {
+
+    public static function middleware(): array
+    {
+        return [
+            new middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('branch-list'), only: ['index']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('branch-create'), only: ['create', 'store']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('branch-edit'), only: ['edit', 'update']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('branch-delete'), only: ['destroy']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('branch-restore'), only: ['restore']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('branch-switch'), only: ['switchBranch']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -107,5 +121,10 @@ class BranchController extends Controller
     {
         Branch::withTrashed()->where('id', decrypt($id))->restore();
         return redirect()->route('branch.register')->with("success", "Branch restored successfully!");
+    }
+
+    public function switchBranch()
+    {
+        //
     }
 }

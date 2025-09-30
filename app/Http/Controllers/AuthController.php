@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Jenssegers\Agent\Agent;
 use Stevebauman\Location\Facades\Location;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class AuthController extends Controller
+class AuthController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('user-force-logout'), only: ['forceLogoutGet', 'forceLogout']),
+            new middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('login-log'), only: ['loginLog']),
+        ];
+    }
+
     function checkLogin()
     {
         if (Auth::user()):

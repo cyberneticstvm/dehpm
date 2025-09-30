@@ -15,7 +15,7 @@ class Branch
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->get('branch')->id > 0) {
+        if (session()->get('branch')?->id > 0) {
             return $next($request);
         }
         return redirect()->route('dashboard')->withError('Error! You dont have an active branch. Please logout and login again to choose the branch.!');

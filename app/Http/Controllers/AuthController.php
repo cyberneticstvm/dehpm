@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\Extra;
 use App\Models\LoginLog;
 use App\Models\User;
 use App\Models\UserBranch;
@@ -37,17 +38,17 @@ class AuthController extends Controller
                 $agent = new Agent();
                 $location = Location::get($request->ip);
                 $user = User::find(Auth::user()->id);
-                $devices = $user->devices()->pluck('name');
-                print_r($user);
-                die;
-            /*if (in_array(loggedDevice($agent), $devices)):
+                $devices = Extra::where('category', 'device')->whereIn('id', $user->devices()->pluck('device_id'))->pluck('name')->toArray();
+                if (in_array(loggedDevice($agent), $devices)):
                     createLoginLog($agent, $location);
                     return redirect()->intended('dashboard')->with("success", "User logged in successfully");
                 else:
-                    return redirect()->route('logout')->with("error", "User not allowed to login inti this device");
-                endif;*/
+                    Auth::logoutCurrentDevice();
+                    return redirect()->back()->with("error", "User not allowed to logged into this device");
+                endif;
+            else:
+                return redirect()->back()->with("error", "The provided credentials do not match with our records.")->withInput($request->all());
             endif;
-            return redirect()->back()->with("error", "The provided credentials do not match with our records.")->withInput($request->all());
         } catch (Exception $e) {
             return redirect()->back()->with("error", $e->getMessage())->withInput($request->all());
         }

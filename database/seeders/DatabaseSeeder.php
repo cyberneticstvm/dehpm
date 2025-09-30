@@ -99,12 +99,12 @@ class DatabaseSeeder extends Seeder
             Extra::insert(['name' => $month, 'category' => 'month']);
         }
 
-        foreach ($devices as $device) {
-            Extra::insert(['name' => $device, 'category' => 'device']);
-        }
-
         foreach ($btypes as $btype) {
             Extra::insert(['name' => $btype, 'category' => 'branch_type']);
+        }
+
+        foreach ($devices as $device) {
+            Extra::insert(['name' => $device, 'category' => 'device']);
         }
 
         foreach ($pmodes as $pmode) {
@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder
         ]);
         UserDevice::insert([
             'user_id' => $user->id,
-            'device_id' => 24,
+            'device_id' => 18,
         ]);
     }
 }

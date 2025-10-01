@@ -40,18 +40,18 @@ use Spatie\Menu\Link;
                 </a>
                 {{
                     Menu::new()->addClass('menu-sub')
-                    ->add(Menu::submenu(Link::to('#', 'Heads')->addClass('menu-link menu-toggle')->addParentClass('menu-item'), Menu::new()
-                    ->addClass('menu-sub')->linkIfCan('user-list', route('user.register'), 'User Management')->addItemClass('menu-link')->addItemParentClass('menu-item')
-                    ->linkIfCan('user-list', route('user.register'), 'User Management')->addItemClass('menu-link')->addItemParentClass('menu-item'))->addItemParentClass('menu-item'))->addItemParentClass('menu-item')
+                    ->add(Menu::submenu(Link::to('#', '<i class="menu-icon tf-icons bx bx-user"></i> Heads')->addClass('menu-link menu-toggle submenu')->addParentClass('menu-item'), Menu::new()
+                    ->addClass('menu-sub')->linkIfCan('user-list', route('user.register'), 'Income')->addItemClass('menu-link submenulink')->addItemParentClass('menu-item')
+                    ->linkIfCan('user-list', route('user.register'), 'Expense')->addItemClass('menu-link submenulink')->addItemParentClass('menu-item'))->addItemParentClass('menu-item'))->addItemParentClass('menu-item')
                     
                 }}
                 {{
                     Menu::new()->addClass('menu-sub')
                     ->add(
-                    Menu::submenu(Link::to('#', 'Heads')->addClass('menu-link menu-toggle')->addParentClass('menu-item'), Menu::new()->addClass('menu-sub')
-                        ->linkIfCan('user-list', route('user.register'), 'User Management')->addItemClass('menu-link')->addItemParentClass('menu-item')
-                        ->linkIfCan('user-list', route('user.register'), 'User Management')->addItemClass('menu-link')->addItemParentClass('menu-item')
-                        ->linkIfCan('user-list', route('user.register'), 'User Management')->addItemClass('menu-link')->addItemParentClass('menu-item')
+                    Menu::submenu(Link::to('#', '<i class="menu-icon tf-icons bx bx-user"></i> Income & Expense')->addClass('menu-link menu-toggle submenu')->addParentClass('menu-item'), Menu::new()->addClass('menu-sub')
+                        ->linkIfCan('user-list', route('user.register'), 'Income')->addItemClass('menu-link submenulink')->addItemParentClass('menu-item')
+                        ->linkIfCan('user-list', route('user.register'), 'Expense')->addItemClass('menu-link submenulink')->addItemParentClass('menu-item')
+                        ->linkIfCan('user-list', route('user.register'), 'Bank Transfer')->addItemClass('menu-link submenulink')->addItemParentClass('menu-item')
                     )->addItemParentClass('menu-item'))->addItemParentClass('menu-item')
                     
                 }}

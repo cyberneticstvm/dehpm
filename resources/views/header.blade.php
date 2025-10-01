@@ -29,6 +29,26 @@
                 </li>
                 <!-- /Search -->
 
+                <li class="nav-item dropdown-language dropdown me-2 me-xl-0" data-bs-toggle="tooltip"
+                    data-bs-offset="0,4"
+                    data-bs-placement="top"
+                    data-bs-html="true"
+                    title="Switch Branch">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                        <i class="fa fa-exchange"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        @forelse(getUserBranches()->where('id', '!=', Session::get('branch')?->id) as $key => $branch)
+                        <li>
+                            <a class="dropdown-item proceed" href="{{ route('user.branch.switch', encrypt($branch->id)) }}">
+                                <span class="align-middle">{{ $branch->name }}</span>
+                            </a>
+                        </li>
+                        @empty
+                        @endforelse
+                    </ul>
+                </li>
+
                 <!-- Style Switcher -->
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

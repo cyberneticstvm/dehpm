@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Session;
 
 class BranchController extends Controller implements HasMiddleware
 {
@@ -123,8 +124,10 @@ class BranchController extends Controller implements HasMiddleware
         return redirect()->route('branch.register')->with("success", "Branch restored successfully!");
     }
 
-    public function switchBranch()
+    public function switchBranch(string $id)
     {
-        //
+        $branch = Branch::findOrFail(decrypt($id));
+        Session::put('branch', $branch);
+        return redirect()->back()->with("success", "Branch switched successfully");
     }
 }

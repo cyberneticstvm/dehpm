@@ -58,5 +58,6 @@ Route::middleware(['web', 'auth', 'auth.session', 'branch'])->group(function () 
         Route::post('update', 'update')->name('branch.update');
         Route::get('delete/{id}', 'destroy')->name('branch.delete');
         Route::get('restore/{id}', 'restore')->name('branch.restore');
+        Route::get('switch/{id}', 'switchBranch')->name('user.branch.switch');
     });
 });

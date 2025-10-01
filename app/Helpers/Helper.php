@@ -9,11 +9,14 @@
     return $code;
 }*/
 
+use App\Models\Branch;
 use App\Models\Extra;
 use App\Models\LoginLog;
 use App\Models\User;
+use App\Models\UserBranch;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 
@@ -60,4 +63,9 @@ function createLoginLog($agent, $location)
     User::where('id', Auth::user()->id)->update([
         'login_session_id' => $uid,
     ]);
+}
+
+function getUserBranches()
+{
+    return Branch::whereIn('id', UserBranch::where('user_id', Auth::id())->pluck('branch_id'))->get();
 }

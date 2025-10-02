@@ -8,14 +8,14 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Create User</h5>
+                            <h5>Create Director</h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    {{ html()->form('POST', route('user.save'))->open() }}
+                    {{ html()->form('POST', route('director.save'))->open() }}
                     <div class="row g-3">
-                        <div class="col-sm-3">
+                        <div class="col-sm-6">
                             <label class="form-label req" for="basicFullname">Full Name</label>
                             <div class="input-group input-group-merge">
                                 <span id="basicFullname2" class="input-group-text"><i class="bx bx-user"></i></span>
@@ -45,32 +45,14 @@
                             <small class="text-danger">{{ $errors->first('email') }}</small>
                             @enderror
                         </div>
-                        <div class="col-sm-3">
-                            <label for="selectpickerBasic" class="form-label req">Role</label>
-                            {{ html()->select($name = 'roles', $value = $roles, old('roles'))->class('select2 form-select')->placeholder('Select')->required() }}
-                            @error('roles')
-                            <small class="text-danger">{{ $errors->first('roles') }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="selectpickerBasic" class="form-label req">Password</label>
-                            {{ html()->password('password', NULL)->class('form-control')->placeholder('******')->required() }}
-                            @error('password')
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                            @enderror
-                        </div>
                         <div class="col-sm-6">
-                            <label for="selectpickerBasic" class="form-label req">Branches <small>(Multiple selection enabled)</small></label>
-                            {{ html()->select($name = 'branches[]', $value = $branches, old('branches'))->class('select2 form-select')->multiple()->required() }}
-                            @error('branches')
-                            <small class="text-danger">{{ $errors->first('branches') }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="selectpickerBasic" class="form-label req">Allowed Devices <small>(Multiple selection enabled)</small></label>
-                            {{ html()->select($name = 'devices[]', $value = $devices, old('devices'))->class('select2 form-select')->multiple()->required() }}
-                            @error('devices')
-                            <small class="text-danger">{{ $errors->first('devices') }}</small>
+                            <label class="form-label req" for="basicFullname">Address</label>
+                            <div class="input-group input-group-merge">
+                                <span id="basicFullname2" class="input-group-text"><i class="bx bx-pin"></i></span>
+                                {{ html()->textarea('address', old('address'))->class('form-control')->placeholder('Address')->required() }}
+                            </div>
+                            @error('address')
+                            <small class="text-danger">{{ $errors->first('address') }}</small>
                             @enderror
                         </div>
                     </div>

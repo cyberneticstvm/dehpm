@@ -55,5 +55,10 @@ $(function(){
                 console.error(xhr.responseText);
             }            
         });  
-    })
+    });
+
+    $(document).on("click", ".addNewDirector", function(){
+        $(".addNewDirectorSpan").text($(this).data("pname"));
+        $("#pid").val($(this).data("pid"));
+    });
 })

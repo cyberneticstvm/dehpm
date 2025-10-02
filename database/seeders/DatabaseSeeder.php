@@ -44,6 +44,21 @@ class DatabaseSeeder extends Seeder
             'branch-delete',
             'branch-restore',
             'branch-switch',
+            'project-list',
+            'project-create',
+            'project-edit',
+            'project-delete',
+            'project-restore',
+            'director-list',
+            'director-create',
+            'director-edit',
+            'director-delete',
+            'director-restore',
+            'project-director-list',
+            'project-director-create',
+            'project-director-edit',
+            'project-director-delete',
+            'project-director-restore',
         ];
 
         foreach ($permissions as $permission) {
@@ -96,6 +111,11 @@ class DatabaseSeeder extends Seeder
             'Other',
         ];
 
+        $contribution = [
+            'Onetime',
+            'Installment'
+        ];
+
         foreach ($months as $month) {
             Extra::insert(['name' => $month, 'category' => 'month']);
         }
@@ -110,6 +130,10 @@ class DatabaseSeeder extends Seeder
 
         foreach ($pmodes as $pmode) {
             Extra::insert(['name' => $pmode, 'category' => 'pmode']);
+        }
+
+        foreach ($contribution as $c) {
+            Extra::insert(['name' => $c, 'category' => 'contribution']);
         }
 
         $branch = Branch::create([

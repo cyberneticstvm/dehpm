@@ -10,11 +10,6 @@
                         <div class="col">
                             <h5>Update Role & Permissions</h5>
                         </div>
-                        <div class="col text-end">
-                            <a href="#" class="btn btn-icon btn-primary">
-                                <span class="tf-icons bx bx-plus"></span>
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="card-body">

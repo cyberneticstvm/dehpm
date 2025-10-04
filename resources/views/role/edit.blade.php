@@ -41,7 +41,7 @@
                         <small class="text-danger">{{ $errors->first('permission') }}</small>
                         @enderror
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col text-end">
                             {{ html()->submit('Update')->class('btn btn-submit btn-primary data-submit me-sm-3 me-1') }}
                             {{ html()->reset('Cancel')->class('btn btn-outline-secondary')->attribute('onClick', 'window.history.back()') }}

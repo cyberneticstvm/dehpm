@@ -8,35 +8,30 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Create Role & Permissions</h5>
+                            <h5>Create Head (Income & Expense)</h5>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    {{ html()->form('POST', route('role.save'))->open() }}
-                    <div class="row">
+                    {{ html()->form('POST', route('head.save'))->open() }}
+                    <div class="row g-3">
                         <div class="col-sm-6">
-                            <label class="form-label req" for="basicFullname">Role Name</label>
+                            <label class="form-label req" for="basicFullname">Head Name</label>
                             <div class="input-group input-group-merge">
-                                <span id="basicFullname2" class="input-group-text"><i class="bx bx-user-minus"></i></span>
-                                {{ html()->text('name', old('name'))->class('form-control')->placeholder('Role Name')->required() }}
+                                <span id="basicFullname2" class="input-group-text"><i class="bx bx-building-house"></i></span>
+                                {{ html()->text('name', old('name'))->class('form-control')->placeholder('Head Name')->required() }}
                             </div>
                             @error('name')
                             <small class="text-danger">{{ $errors->first('name') }}</small>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-12"><label class="form-label req" for="basicFullname">Permissions</label></div>
-                        @foreach($permissions as $permission)
-                        <div class="col-sm-2">
-                            <label class="form-check-label" for="">{{ $permission->name }}</label><br />
-                            {{ html()->checkbox($name = 'permission[]', $checked=false, $value = $permission->id)->class('form-check-input') }}
+                        <div class="col-sm-3">
+                            <label for="selectpickerBasic" class="form-label req">Type</label>
+                            {{ html()->select($name = 'type', $value = $types, old('type'))->class('select2 form-select')->placeholder('Select')->required() }}
+                            @error('roles')
+                            <small class="text-danger">{{ $errors->first('roles') }}</small>
+                            @enderror
                         </div>
-                        @endforeach
-                        @error('permission')
-                        <small class="text-danger">{{ $errors->first('permission') }}</small>
-                        @enderror
                     </div>
                     <div class="row mt-3">
                         <div class="col text-end">

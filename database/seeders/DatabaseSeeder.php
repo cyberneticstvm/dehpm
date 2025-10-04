@@ -59,6 +59,21 @@ class DatabaseSeeder extends Seeder
             'project-director-edit',
             'project-director-delete',
             'project-director-restore',
+            'head-list',
+            'head-create',
+            'head-edit',
+            'head-delete',
+            'head-restore',
+            'income-expense-list',
+            'income-expense-create',
+            'income-expense-edit',
+            'income-expense-delete',
+            'income-expense-restore',
+            'bank-transfer-list',
+            'bank-transfer-create',
+            'bank-transfer-edit',
+            'bank-transfer-delete',
+            'bank-transfer-restore',
         ];
 
         foreach ($permissions as $permission) {
@@ -116,6 +131,11 @@ class DatabaseSeeder extends Seeder
             'Installment'
         ];
 
+        $heads = [
+            'Income',
+            'Expense',
+        ];
+
         foreach ($months as $month) {
             Extra::insert(['name' => $month, 'category' => 'month']);
         }
@@ -134,6 +154,10 @@ class DatabaseSeeder extends Seeder
 
         foreach ($contribution as $c) {
             Extra::insert(['name' => $c, 'category' => 'contribution']);
+        }
+
+        foreach ($heads as $head) {
+            Extra::insert(['name' => $head, 'category' => 'head']);
         }
 
         $branch = Branch::create([

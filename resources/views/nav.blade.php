@@ -36,7 +36,7 @@ use Spatie\Menu\Link;
                     @if(Auth::user()->can('role-list'))
                     <li class="menu-item">
                         <a href="{{ route('role.register') }}" class="menu-link">
-                            <div data-i18n="Role Management">Role Management</div>
+                            <div data-i18n="Roles & Permissions">Roles & Permissions</div>
                         </a>
                     </li>
                     @endif
@@ -82,6 +82,43 @@ use Spatie\Menu\Link;
                     <i class="menu-icon tf-icons bx bx-rupee"></i>
                     <div data-i18n="Accounts">Accounts</div>
                 </a>
+                <ul class="menu-sub">
+                    @if(Auth::user()->can('head-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('head.register') }}" class="menu-link">
+                            <div data-i18n="Heads">Heads</div>
+                        </a>
+                    </li>
+                    @endif
+                    <li class="menu-item">
+                        <a href="#" class="menu-link menu-toggle">
+                            <div data-i18n="Income & Expense">Income & Expense</div>
+                        </a>
+                        <ul class="menu-sub">
+                            @if(Auth::user()->can('income-expense-list'))
+                            <li class="menu-item">
+                                <a href="{{ route('ie.register', 'Income') }}" class="menu-link">
+                                    <div data-i18n="Income">Income</div>
+                                </a>
+                            </li>
+                            @endif
+                            @if(Auth::user()->can('income-expense-list'))
+                            <li class="menu-item">
+                                <a href="{{ route('ie.register', 'Expense') }}" class="menu-link">
+                                    <div data-i18n="Expense">Expense</div>
+                                </a>
+                            </li>
+                            @endif
+                            @if(Auth::user()->can('bank-transfer-list'))
+                            <li class="menu-item">
+                                <a href="{{ route('btransfer.register') }}" class="menu-link">
+                                    <div data-i18n="Bank Transfer">Bank Transfer</div>
+                                </a>
+                            </li>
+                            @endif
+                        </ul>
+                    </li>
+                </ul>
             </li>
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">

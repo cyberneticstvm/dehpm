@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankTransferController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\HeadController;
+use App\Http\Controllers\IncomeExpenseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectDirectorController;
 use App\Http\Controllers\RoleController;
@@ -102,5 +105,35 @@ Route::middleware(['web', 'auth', 'auth.session', 'branch'])->group(function () 
         Route::post('edit/{id}', 'update')->name('project.director.update');
         Route::get('delete/{id}', 'destroy')->name('project.director.delete');
         Route::get('restore/{id}', 'restore')->name('project.director.restore');
+    });
+
+    Route::prefix('head')->controller(HeadController::class)->group(function () {
+        Route::get('', 'index')->name('head.register');
+        Route::get('create', 'create')->name('head.create');
+        Route::post('create', 'store')->name('head.save');
+        Route::get('edit/{id}', 'edit')->name('head.edit');
+        Route::post('edit/{id}', 'update')->name('head.update');
+        Route::get('delete/{id}', 'destroy')->name('head.delete');
+        Route::get('restore/{id}', 'restore')->name('head.restore');
+    });
+
+    Route::prefix('ie')->controller(IncomeExpenseController::class)->group(function () {
+        Route::get('{type}', 'index')->name('ie.register');
+        Route::get('create/{type}', 'create')->name('ie.create');
+        Route::post('create/{type}', 'store')->name('ie.save');
+        Route::get('edit/{id}/{type}', 'edit')->name('ie.edit');
+        Route::post('edit/{id}/{type}', 'update')->name('ie.update');
+        Route::get('delete/{id}/{type}', 'destroy')->name('ie.delete');
+        Route::get('restore/{id}/{type}', 'restore')->name('ie.restore');
+    });
+
+    Route::prefix('btransfer')->controller(BankTransferController::class)->group(function () {
+        Route::get('', 'index')->name('btransfer.register');
+        Route::get('create', 'create')->name('btransfer.create');
+        Route::post('create', 'store')->name('btransfer.save');
+        Route::get('edit/{id}', 'edit')->name('btransfer.edit');
+        Route::post('edit/{id}', 'update')->name('btransfer.update');
+        Route::get('delete/{id}', 'destroy')->name('btransfer.delete');
+        Route::get('restore/{id}', 'restore')->name('btransfer.restore');
     });
 });

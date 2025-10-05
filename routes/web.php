@@ -7,6 +7,8 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\HeadController;
 use App\Http\Controllers\IncomeExpenseController;
+use App\Http\Controllers\ManSupController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectDirectorController;
 use App\Http\Controllers\RoleController;
@@ -135,5 +137,26 @@ Route::middleware(['web', 'auth', 'auth.session', 'branch'])->group(function () 
         Route::post('edit/{id}', 'update')->name('btransfer.update');
         Route::get('delete/{id}', 'destroy')->name('btransfer.delete');
         Route::get('restore/{id}', 'restore')->name('btransfer.restore');
+    });
+
+    Route::prefix('ms')->controller(ManSupController::class)->group(function () {
+        Route::get('{type}', 'index')->name('ms.register');
+        Route::get('create/{type}', 'create')->name('ms.create');
+        Route::post('create/{type}', 'store')->name('ms.save');
+        Route::get('edit/{id}/{type}', 'edit')->name('ms.edit');
+        Route::post('edit/{id}/{type}', 'update')->name('ms.update');
+        Route::get('delete/{id}/{type}', 'destroy')->name('ms.delete');
+        Route::get('restore/{id}/{type}', 'restore')->name('ms.restore');
+    });
+
+    Route::prefix('product')->controller(ProductController::class)->group(function () {
+        Route::get('hsn', 'hsn')->name('product.hsn');
+        Route::get('{hsn}', 'index')->name('product.register');
+        Route::get('create/{hsn}', 'create')->name('product.create');
+        Route::post('create/{hsn}', 'store')->name('product.save');
+        Route::get('edit/{id}/{hsn}', 'edit')->name('product.edit');
+        Route::post('edit/{id}/{hsn}', 'update')->name('product.update');
+        Route::get('delete/{id}/{hsn}', 'destroy')->name('product.delete');
+        Route::get('restore/{id}/{hsn}', 'restore')->name('product.restore');
     });
 });

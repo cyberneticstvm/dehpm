@@ -11,6 +11,7 @@
 
 use App\Models\Branch;
 use App\Models\Extra;
+use App\Models\Hsn;
 use App\Models\LoginLog;
 use App\Models\User;
 use App\Models\UserBranch;
@@ -68,4 +69,9 @@ function createLoginLog($agent, $location)
 function getUserBranches()
 {
     return Branch::whereIn('id', UserBranch::where('user_id', Auth::id())->pluck('branch_id'))->get();
+}
+
+function hsns()
+{
+    return Hsn::orderBy('name')->get();
 }

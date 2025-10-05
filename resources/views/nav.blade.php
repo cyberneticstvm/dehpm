@@ -79,6 +79,12 @@ use Spatie\Menu\Link;
             </li>
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons fa fa-stethoscope"></i>
+                    <div data-i18n="Consultation">Consultation</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-rupee"></i>
                     <div data-i18n="Accounts">Accounts</div>
                 </a>
@@ -125,6 +131,112 @@ use Spatie\Menu\Link;
                     <i class="menu-icon tf-icons bx bx-package"></i>
                     <div data-i18n="Product">Product</div>
                 </a>
+                <ul class="menu-sub">
+                    @if(Auth::user()->can('manufacturer-supplier-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('ms.register', 'Manufacturer') }}" class="menu-link">
+                            <div data-i18n="Manufacturer">Manufacturer</div>
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->can('manufacturer-supplier-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('ms.register', 'Supplier') }}" class="menu-link">
+                            <div data-i18n="Supplier">Supplier</div>
+                        </a>
+                    </li>
+                    @endif
+                    <li class="menu-item">
+                        <a href="{{ route('product.hsn') }}" class="menu-link">
+                            <div data-i18n="Hsn Register">Hsn Register</div>
+                        </a>
+                    </li>
+                    @if(Auth::user()->can('product-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                            <div data-i18n="Product Master">Product Master</div>
+                        </a>
+                        <ul class="menu-sub">
+                            @forelse(hsns() as $key => $item)
+                            <li class="menu-item">
+                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
+                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
+                                </a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    @endif
+                    @if(Auth::user()->can('bank-transfer-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                            <div data-i18n="Purchases">Purchase</div>
+                        </a>
+                        <ul class="menu-sub">
+                            @forelse(hsns() as $key => $item)
+                            <li class="menu-item">
+                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
+                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
+                                </a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    @endif
+                    @if(Auth::user()->can('bank-transfer-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                            <div data-i18n="Transfer">Transfer</div>
+                        </a>
+                        <ul class="menu-sub">
+                            @forelse(hsns() as $key => $item)
+                            <li class="menu-item">
+                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
+                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
+                                </a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    @endif
+                    @if(Auth::user()->can('bank-transfer-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                            <div data-i18n="Pending Transfer">Pending Transfer</div>
+                        </a>
+                        <ul class="menu-sub">
+                            @forelse(hsns() as $key => $item)
+                            <li class="menu-item">
+                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
+                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
+                                </a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    @endif
+                    @if(Auth::user()->can('bank-transfer-list'))
+                    <li class="menu-item">
+                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                            <div data-i18n="Stock Status">Stock Status</div>
+                        </a>
+                        <ul class="menu-sub">
+                            @forelse(hsns() as $key => $item)
+                            <li class="menu-item">
+                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
+                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
+                                </a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    @endif
+                </ul>
             </li>
             <li class="menu-item">
                 <a href="javascript:void(0)" class="menu-link menu-toggle">

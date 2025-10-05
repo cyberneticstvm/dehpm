@@ -4,12 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Branch;
 use App\Models\Extra;
-use App\Models\Month;
-use App\Models\Project;
+use App\Models\Hsn;
 use App\Models\User;
 use App\Models\UserBranch;
 use App\Models\UserDevice;
-use App\Models\UserProject;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -24,61 +22,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        $permissions = [
-            'login-log',
-            'user-force-logout',
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'role-restore',
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
-            'user-restore',
-            'branch-list',
-            'branch-create',
-            'branch-edit',
-            'branch-delete',
-            'branch-restore',
-            'branch-switch',
-            'project-list',
-            'project-create',
-            'project-edit',
-            'project-delete',
-            'project-restore',
-            'director-list',
-            'director-create',
-            'director-edit',
-            'director-delete',
-            'director-restore',
-            'project-director-list',
-            'project-director-create',
-            'project-director-edit',
-            'project-director-delete',
-            'project-director-restore',
-            'head-list',
-            'head-create',
-            'head-edit',
-            'head-delete',
-            'head-restore',
-            'income-expense-list',
-            'income-expense-create',
-            'income-expense-edit',
-            'income-expense-delete',
-            'income-expense-restore',
-            'bank-transfer-list',
-            'bank-transfer-create',
-            'bank-transfer-edit',
-            'bank-transfer-delete',
-            'bank-transfer-restore',
-        ];
-
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission, 'guard_name' => 'web']);
-        }
 
         $user = User::factory()->create([
             'name' => 'Vijoy Sasidharan',

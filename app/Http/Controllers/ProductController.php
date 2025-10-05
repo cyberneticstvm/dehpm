@@ -26,9 +26,9 @@ class ProductController extends Controller implements HasMiddleware
 
     protected $hsns, $manufacturers;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->hsns = Hsn::pluck('name', 'id');
+        $this->hsns = Hsn::where('id', decrypt($request->hsn))->pluck('name', 'id');
         $this->manufacturers = ManufactureSupplier::where('type', 'Manufacturer')->pluck('name', 'id');
     }
     /**

@@ -72,6 +72,11 @@ class PermissionSeeder extends Seeder
             'product-edit',
             'product-delete',
             'product-restore',
+            'purchase-list',
+            'purchase-create',
+            'purchase-edit',
+            'purchase-delete',
+            'purchase-restore',
         ];
 
         foreach ($permissions as $permission) {

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('short_name', 2)->unique();
             $table->bigInteger('code');
             $table->integer('tax_percentage')->default(0);
+            $table->boolean('is_expiry')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

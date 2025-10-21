@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Branch Register</h5>
+                            <h5>Purchase Register</h5>
                         </div>
                         <div class="col text-end">
                             <div class="btn-group">
@@ -24,9 +24,9 @@
                                     <li><a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-file-pdf text-danger"></i>&nbsp;&nbsp;Pdf</a></li>
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-icon btn-primary modalDrawer" data-identifier="add-new-branch">
+                            <a href="{{ route('purchase.create') }}" class="btn btn-icon btn-primary">
                                 <span class="tf-icons bx bx-plus"></span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -35,29 +35,33 @@
                         <thead>
                             <tr>
                                 <th>SL No</th>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th>Mobile</th>
-                                <th>Address</th>
+                                <th>PNo</th>
+                                <th>PDate</th>
+                                <th>Supplier</th>
+                                <th>Invoice</th>
+                                <th>Value</th>
+                                <th>View</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($branches as $key => $branch)
-                            <tr class="{{ ($branch->is_primary) ? 'bg-success' : '' }}">
+                            @forelse($purchases as $key => $purchase)
+                            <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $branch->name }}</td>
-                                <td>{{ $branch->code }}</td>
-                                <td>{{ $branch->mobile }}</td>
-                                <td>{{ $branch->address }}</td>
-                                <td class="text-center">{!! $branch->deleteStatus() !!}</td>
+                                <td>{{ $purchase->id }}</td>
+                                <td>{{ $purchase->pdate->format('d.M.Y') }}</td>
+                                <td>{{ $purchase->supplier->name }}</td>
+                                <td>{{ $purchase->supplier_invoice }}</td>
+                                <td class="text-end">{{ $purchase->details()->sum('total') }}</td>
+                                <td></td>
+                                <td class="text-center">{!! $purchase->deleteStatus() !!}</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="modalDrawerEdit text-warning" data-identifier="edit-branch" data-id="{{ $branch->id }}" data-model="branch">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                    @if($branch->deleted_at)
-                                    <a href="{{ route('branch.restore', encrypt($branch->id)) }}" class="text-success proceed">Restore</a>
+                                    <a href="{{ route('purchase.edit', encrypt($purchase->id)) }}" class="text-warning">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    @if($purchase->deleted_at)
+                                    <a href="{{ route('purchase.restore',encrypt($purchase->id)) }}" class="text-success proceed">Restore</a>
                                     @else
-                                    <a href="{{ route('branch.delete', encrypt($branch->id)) }}" class="text-danger dlt">Delete</a>
+                                    <a href="{{ route('purchase.delete', encrypt($purchase->id)) }}" class="text-danger dlt">Delete</a>
                                     @endif
                                 </td>
                             </tr>
@@ -70,6 +74,4 @@
         </div>
     </div>
 </div>
-@include("drawer.branch.create")
-@include("drawer.branch.edit")
 @endsection

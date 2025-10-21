@@ -18,6 +18,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'LE',
             'code' => '90015000',
             'tax_percentage' => 5,
+            'is_expiry' => false,
         ]);
 
         Hsn::create([
@@ -25,6 +26,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'FR',
             'code' => '90031100',
             'tax_percentage' => 5,
+            'is_expiry' => false,
         ]);
 
         Hsn::create([
@@ -32,6 +34,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'CL',
             'code' => '90013000',
             'tax_percentage' => 5,
+            'is_expiry' => true,
         ]);
 
         Hsn::create([
@@ -39,6 +42,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'SG',
             'code' => '90041000',
             'tax_percentage' => 18,
+            'is_expiry' => false,
         ]);
 
         Hsn::create([
@@ -46,6 +50,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'SO',
             'code' => '33079020',
             'tax_percentage' => 18,
+            'is_expiry' => true,
         ]);
 
         Hsn::create([
@@ -53,6 +58,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'AC',
             'code' => '90185090',
             'tax_percentage' => 5,
+            'is_expiry' => false,
         ]);
 
         Hsn::create([
@@ -60,6 +66,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'OI',
             'code' => '30049099',
             'tax_percentage' => 5,
+            'is_expiry' => true,
         ]);
 
         Hsn::create([
@@ -67,6 +74,7 @@ class HsnSeeder extends Seeder
             'short_name' => 'ED',
             'code' => '30042039',
             'tax_percentage' => 5,
+            'is_expiry' => true,
         ]);
     }
 }

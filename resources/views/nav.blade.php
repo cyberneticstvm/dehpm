@@ -168,55 +168,25 @@ use Spatie\Menu\Link;
                         </ul>
                     </li>
                     @endif
-                    @if(Auth::user()->can('bank-transfer-list'))
+                    @if(Auth::user()->can('purchase-list'))
                     <li class="menu-item">
-                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                        <a href="{{ route('purchase.register') }}" class="menu-link">
                             <div data-i18n="Purchases">Purchase</div>
                         </a>
-                        <ul class="menu-sub">
-                            @forelse(hsns() as $key => $item)
-                            <li class="menu-item">
-                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
-                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
-                                </a>
-                            </li>
-                            @empty
-                            @endforelse
-                        </ul>
                     </li>
                     @endif
                     @if(Auth::user()->can('bank-transfer-list'))
                     <li class="menu-item">
-                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                        <a href="{{ route('head.register') }}" class="menu-link">
                             <div data-i18n="Transfer">Transfer</div>
                         </a>
-                        <ul class="menu-sub">
-                            @forelse(hsns() as $key => $item)
-                            <li class="menu-item">
-                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
-                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
-                                </a>
-                            </li>
-                            @empty
-                            @endforelse
-                        </ul>
                     </li>
                     @endif
                     @if(Auth::user()->can('bank-transfer-list'))
                     <li class="menu-item">
-                        <a href="{{ route('head.register') }}" class="menu-link menu-toggle">
+                        <a href="{{ route('head.register') }}" class="menu-link">
                             <div data-i18n="Pending Transfer">Pending Transfer</div>
                         </a>
-                        <ul class="menu-sub">
-                            @forelse(hsns() as $key => $item)
-                            <li class="menu-item">
-                                <a href="{{ route('product.register', encrypt($item->id)) }}" class="menu-link">
-                                    <div data-i18n="{{ $item->name }}">{{ $item->name }}</div>
-                                </a>
-                            </li>
-                            @empty
-                            @endforelse
-                        </ul>
                     </li>
                     @endif
                     @if(Auth::user()->can('bank-transfer-list'))

@@ -11,6 +11,7 @@ use App\Http\Controllers\ManSupController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectDirectorController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::middleware(['web', 'auth', 'auth.session', 'branch'])->group(function () 
 
     Route::prefix('ajax')->controller(AjaxController::class)->group(function () {
         Route::get('edit', 'edit')->name('edit');
+        Route::get('hsn', 'hsn')->name('hsn');
+        Route::get('products', 'products')->name('products');
     });
 
     Route::prefix('role')->controller(RoleController::class)->group(function () {
@@ -158,5 +161,15 @@ Route::middleware(['web', 'auth', 'auth.session', 'branch'])->group(function () 
         Route::post('edit/{id}/{hsn}', 'update')->name('product.update');
         Route::get('delete/{id}/{hsn}', 'destroy')->name('product.delete');
         Route::get('restore/{id}/{hsn}', 'restore')->name('product.restore');
+    });
+
+    Route::prefix('purchase')->controller(PurchaseController::class)->group(function () {
+        Route::get('', 'index')->name('purchase.register');
+        Route::get('create', 'create')->name('purchase.create');
+        Route::post('create', 'store')->name('purchase.save');
+        Route::get('edit/{id}', 'edit')->name('purchase.edit');
+        Route::post('edit/{id}', 'update')->name('purchase.update');
+        Route::get('delete/{id}', 'destroy')->name('purchase.delete');
+        Route::get('restore/{id}', 'restore')->name('purchase.restore');
     });
 });
